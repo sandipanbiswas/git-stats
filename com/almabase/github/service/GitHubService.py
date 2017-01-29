@@ -19,13 +19,14 @@ class GitHubService:
         topNCommiters=[]
         #By default the api gives committers list in descending order of contributions. Getting top n committers from
         #list
-        for commiterlist in commitersList:
-            for commiter in commiterlist:
+        for commiterList in commitersList:
+            for commiter in commiterList:
                 topNCommiters.append(commiter)
                 i=i+1
                 if i >= top:
                     break
-
+            if i >= top:
+                break
         return  topNCommiters
 
 

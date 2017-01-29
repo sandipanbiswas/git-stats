@@ -50,9 +50,9 @@ class GitHubRepo:
             payload = {'page': page}
             commiters = requests.get(url, params=payload)
 
-        if commiter_objs.status_code == 404:
+        if commiters.status_code == 404:
             return commiter_objs
-        if commiter_objs.status_code == 403:
+        if commiters.status_code == 403:
             print 'Rate Limit exceeded.'
             return []
 

@@ -12,11 +12,10 @@ class GitManager:
         topNRepos=self.topNRepos(org,top_repo_count)
         for repo in topNRepos:
             topCommiters=GitHubService().getTopNCommittersByRepo(repo,top_commiter_count)
-            for commiterList in topCommiters:
+            if (len(topCommiters) > 0):
                 print 'for repo ' + repo[1]['name'] + " top " + str(top_commiter_count) + " contributors as follows.. \n"
-
-            for commiter in commiterList:
-                print commiter['login'] + 'with contributions '+ str(commiter['contributions'])
+            for commiter in topCommiters:
+                    print commiter['login'] + 'with contributions '+ str(commiter['contributions'])
         print '\n'
 
     def start(self):
