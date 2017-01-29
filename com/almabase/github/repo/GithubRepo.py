@@ -2,8 +2,9 @@ import requests
 import json
 from com.almabase.github.settings import constants
 class GitHubRepo:
-
+    #Get all repositories of the organisation
     def getReposByOrg(self,org):
+        print 'Fetching repos for ' + org
         page=1
         payload = {'page': page,'client_id':constants.CLIENT_ID,'client_secret':constants.CLIENT_SECRET}
         repos=requests.get(constants.GITHUB_ORG_REPOS_URL, params=payload)
@@ -17,13 +18,15 @@ class GitHubRepo:
             payload = {'page': page}
             repos = requests.get(constants.GITHUB_ORG_REPOS_URL, params=payload)
         if repos.status_code>=400:
-            print 'Rate Limit exceeded. Reading from file..'
+            print 'Rate Limit exceeded. Reading from file..'  #We could use redis cache here in case limit is exceeded
             with open('../json/repos.json') as data_file:
                 repo_objs = json.load(data_file)
-
+        print 'Fetched repos for'+ org
         return repo_objs;
 
     def getCommitersByRepo(self, repo):
+        # Get all committers  of the repo
+        print 'Fetching commiters  for repo : ' + repo[1]['name']
         page = 1
         payload = {'page': page,'client_id':constants.CLIENT_ID,'client_secret':constants.CLIENT_SECRET}
         url=constants.GITHUB_REPO_URL+repo[1]['owner']['login']+'/'+repo[1]['name']+'/contributors'
@@ -39,7 +42,7 @@ class GitHubRepo:
             commiters = requests.get(url, params=payload)
 
         if commiters.status_code >= 400:
-            print 'Rate Limit exceeded. Reading from file..'
-
+            print 'Rate Limit exceeded.'
+        print 'Commiters fetched  for repo : ' + repo[1]['name'] +'\n'
         return commiter_objs;
 
