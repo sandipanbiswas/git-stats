@@ -14,16 +14,17 @@ class GitHubService:
         return heapq._nlargest(int(top),heap)
 
     def getTopNCommittersByRepo(self,repo,top):
-        commiterList=GitHubRepo().getCommitersByRepo(repo)
+        commitersList=GitHubRepo().getCommitersByRepo(repo)
         i=0
         topNCommiters=[]
         #By default the api gives committers list in descending order of contributions. Getting top n committers from
         #list
-        for commiter in commiterList:
-            topNCommiters.append(commiter)
-            i=i+1
-            if i >= top:
-                break
+        for commiterlist in commitersList:
+            for commiter in commiterlist:
+                topNCommiters.append(commiter)
+                i=i+1
+                if i >= top:
+                    break
 
         return  topNCommiters
 

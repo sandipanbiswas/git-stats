@@ -2,9 +2,10 @@ from com.almabase.github.service.GitHubService import GitHubService
 class GitManager:
     def topNRepos(self,org,top_repo_count):
         topRepos=GitHubService().getTopNReposByOrg(org,top_repo_count)
-        print 'Top '+ str(top_repo_count) + ' repos in order based on fork_count as follows \n'
-        for topRepo in topRepos:
-            print 'Name : '+ topRepo[1]['name'] + ' url :' + topRepo[1]['url'] + ' fork_count ' + str(topRepo[1]['forks_count'])
+        if len(topRepos)>0:
+            print 'Top '+ str(top_repo_count) + ' repos in order based on fork_count as follows \n'
+            for topRepo in topRepos:
+                print 'Name : '+ topRepo[1]['name'] + ' url :' + topRepo[1]['url'] + ' fork_count ' + str(topRepo[1]['forks_count'])
         return topRepos
 
     def topNCommiters(self, org, top_repo_count, top_commiter_count):
