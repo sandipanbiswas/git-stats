@@ -11,7 +11,7 @@ class GitHubService:
             for repo in repos:
                 heapq.heappush(heap,(repo['forks_count'],repo))
 
-        return heapq._nlargest(top,heap)
+        return heapq._nlargest(int(top),heap)
 
     def getTopNCommittersByRepo(self,repo,top):
         commiterList=GitHubRepo().getCommitersByRepo(repo)

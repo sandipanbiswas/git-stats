@@ -18,4 +18,11 @@ class GitManager:
                 print commiter['login'] + 'with contributions '+ str(commiter['contributions'])
         print '\n'
 
-GitManager().topNCommiters("google",3,5)
+    def start(self):
+        org = raw_input('Enter name of organisation for which no of top repositories you want to fetch: ')
+        no_of_repos=raw_input('Enter no of top repositories you want to fetch: ')
+        no_of_committers=raw_input('Enter no of top committers in each repo you want to fetch: ')
+        self.topNCommiters(org, no_of_repos, no_of_committers)
+
+
+GitManager().start()
